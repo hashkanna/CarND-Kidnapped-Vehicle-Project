@@ -1,10 +1,3 @@
-/*
- * particle_filter.cpp
- *
- *  Created on: Dec 12, 2016
- *      Author: Tiffany Huang
- */
-
 #include <random>
 #include <algorithm>
 #include <iostream>
@@ -28,7 +21,7 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
 	normal_distribution<double> dist_psi(theta, std[2]);
 
 	num_particles = 25;
-    particles.resize(num_particles);
+	particles.resize(num_particles);
 	for (int i=0; i < num_particles; i++){
 		Particle p;
 		p.id = i;
@@ -49,7 +42,7 @@ void ParticleFilter::prediction(double delta_t, double std_pos[], double velocit
 	//  http://en.cppreference.com/w/cpp/numeric/random/normal_distribution
 	//  http://www.cplusplus.com/reference/random/default_random_engine/
 	default_random_engine gen;
-    double x, y, theta;
+	double x, y, theta;
 
 	for (auto& p:particles) {
 		if (fabs(yaw_rate) < 1e-8) {
@@ -154,7 +147,7 @@ void ParticleFilter::resample() {
 	//   http://en.cppreference.com/w/cpp/numeric/random/discrete_distribution
 
 	std::random_device rd;
-    std::mt19937 gen(rd());
+	std::mt19937 gen(rd());
     std::discrete_distribution<> d(weights.begin(), weights.end());
     vector<Particle> particles_new;
 
